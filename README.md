@@ -9,6 +9,21 @@
 <h3>Description</h3>
 The project aimed to deploy a resilient AWS architecture using infrastructure as code (IaC) principles to streamline resource provisioning and management. Leveraging Terraform, the infrastructure was divided into three modular components: Network, Server, and Load Balancer.
 
+<h3>Root Module</h3>
+main.tf
+```terraform
+module "network" {
+  source = "./NetwrokInfra"
+  vpc_cidr_block   = var.vpc_cidr_block
+  vpcname = "wlo-terraform-vpc"
+  subnet-name = "terraform-subnet"
+  wlo-terraform-igw-name = "wlo-terraform-igw"
+  natgw-name = "terraform-nat-gw"
+  publicrtname = "public-subnet-routetable"
+  privatertname = "private-subnet-routetable"
+}
+```
+
 <h3>Network Module</h3>
 The Network module was responsible for creating the foundational components of the architecture within the VPC. This included defining the VPC itself, along with the associated subnets, route tables, and Internet Gateway. Two public subnets were designated for the ALB and NAT Gateway, while two private subnets were established across different availability zones to host the EC2 instances.
 
@@ -22,6 +37,24 @@ module "network" {
   natgw-name = "terraform-nat-gw"
   publicrtname = "public-subnet-routetable"
   privatertname = "private-subnet-routetable"
+}
+module "server" {
+  source = "./EC2"
+  vpcid = module.network.vpcid
+  subnetid = module.network.subnetid
+  ami = "ami-09eb2ed0e9c2f6126"
+  instance-type = "t2.micro"
+  keypair = "wlo-keypair"
+  instance-name = "ec2-terraform"
+  ingress-port = [22,80,443]
+}
+module "loadbalancer" {
+  source = "./LoadBalancer"
+  vpcid = module.network.vpcid
+  alb-ingress-port = [80,443]
+  public-subnetid = module.network.public-subnetid
+  instance-id = module.server.instance-id
+  certificate = "your certificate arn"
 }
 ```
 
