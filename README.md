@@ -12,6 +12,19 @@ The project aimed to deploy a resilient AWS architecture using infrastructure as
 <h3>Network Module</h3>
 The Network module was responsible for creating the foundational components of the architecture within the VPC. This included defining the VPC itself, along with the associated subnets, route tables, and Internet Gateway. Two public subnets were designated for the ALB and NAT Gateway, while two private subnets were established across different availability zones to host the EC2 instances.
 
+```terraform
+module "network" {
+  source = "./NetwrokInfra"
+  vpc_cidr_block   = var.vpc_cidr_block
+  vpcname = "wlo-terraform-vpc"
+  subnet-name = "terraform-subnet"
+  wlo-terraform-igw-name = "wlo-terraform-igw"
+  natgw-name = "terraform-nat-gw"
+  publicrtname = "public-subnet-routetable"
+  privatertname = "private-subnet-routetable"
+}
+```
+
 <h3>Server Module</h3>
 The Server module focused on provisioning the EC2 instances running NGINX servers. These instances were deployed within the private subnets to ensure security and isolation from the internet while being accessible through the ALB. Configuration parameters such as instance type, AMI, security groups, and user data scripts were specified within this module.
 
