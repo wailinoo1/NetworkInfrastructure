@@ -28,8 +28,32 @@ module "network" {
 <h3>Server Module</h3>
 The Server module focused on provisioning the EC2 instances running NGINX servers. These instances were deployed within the private subnets to ensure security and isolation from the internet while being accessible through the ALB. Configuration parameters such as instance type, AMI, security groups, and user data scripts were specified within this module.
 
+```terraform
+module "server" {
+  source = "./EC2"
+  vpcid = module.network.vpcid
+  subnetid = module.network.subnetid
+  ami = "ami-09eb2ed0e9c2f6126"
+  instance-type = "t2.micro"
+  keypair = "wlo-keypair"
+  instance-name = "ec2-terraform"
+  ingress-port = [22,80,443]
+}
+```
+
 <h3>Load Balancer Module</h3>
 The Load Balancer module was responsible for setting up the Application Load Balancer (ALB) to evenly distribute incoming traffic across the EC2 instances. This component defined the ALB listeners, target groups, and health checks to ensure efficient routing of requests to healthy instances.
+
+```terraform
+module "loadbalancer" {
+  source = "./LoadBalancer"
+  vpcid = module.network.vpcid
+  alb-ingress-port = [80,443]
+  public-subnetid = module.network.public-subnetid
+  instance-id = module.server.instance-id
+  certificate = " - your certificate arn"
+}
+```
 
 <h3>Conclution</h3>
 By structuring the architecture into modular components, the project aimed to achieve scalability, maintainability, and repeatability in infrastructure deployment and management. This approach facilitated easy scalability and future modifications to accommodate evolving business requirements and traffic demands. Additionally, using Terraform allowed for version-controlled infrastructure changes and simplified infrastructure provisioning across multiple environments.
