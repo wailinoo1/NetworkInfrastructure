@@ -114,7 +114,7 @@ We are using S3 Bucket to store Terraform state files for the purpose of collabo
 ```terraform
 terraform {
   backend "s3" {
-    bucket         = "your S3 Bucket name to store stage file"
+    bucket         = "your S3 Bucket name to store state file"
     key            = "terraform.tfstate"  # Replace with a unique key for each configuration
     region         = "ap-southeast-1"
     encrypt        = true
