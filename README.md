@@ -44,6 +44,14 @@ module "loadbalancer" {
 }
 ```
 
+<h3>Terraform Command:</h3>
+```terraform
+terraform init
+terraform validate
+terraform plan
+terraform apply --auto-approve
+```
+
 <h3>Network Module</h3>
 The Network module was responsible for creating the foundational components of the architecture within the VPC. This included defining the VPC itself, along with the associated subnets, route tables, and Internet Gateway. Two public subnets were designated for the ALB and NAT Gateway, while two private subnets were established across different availability zones to host the EC2 instances.
 
