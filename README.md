@@ -22,22 +22,6 @@ module "network" {
   publicrtname = "public-subnet-routetable"
   privatertname = "private-subnet-routetable"
 }
-```
-
-<h3>Network Module</h3>
-The Network module was responsible for creating the foundational components of the architecture within the VPC. This included defining the VPC itself, along with the associated subnets, route tables, and Internet Gateway. Two public subnets were designated for the ALB and NAT Gateway, while two private subnets were established across different availability zones to host the EC2 instances.
-
-```terraform
-module "network" {
-  source = "./NetwrokInfra"
-  vpc_cidr_block   = var.vpc_cidr_block
-  vpcname = "wlo-terraform-vpc"
-  subnet-name = "terraform-subnet"
-  wlo-terraform-igw-name = "wlo-terraform-igw"
-  natgw-name = "terraform-nat-gw"
-  publicrtname = "public-subnet-routetable"
-  privatertname = "private-subnet-routetable"
-}
 module "server" {
   source = "./EC2"
   vpcid = module.network.vpcid
@@ -55,6 +39,22 @@ module "loadbalancer" {
   public-subnetid = module.network.public-subnetid
   instance-id = module.server.instance-id
   certificate = "your certificate arn"
+}
+```
+
+<h3>Network Module</h3>
+The Network module was responsible for creating the foundational components of the architecture within the VPC. This included defining the VPC itself, along with the associated subnets, route tables, and Internet Gateway. Two public subnets were designated for the ALB and NAT Gateway, while two private subnets were established across different availability zones to host the EC2 instances.
+
+```terraform
+module "network" {
+  source = "./NetwrokInfra"
+  vpc_cidr_block   = var.vpc_cidr_block
+  vpcname = "wlo-terraform-vpc"
+  subnet-name = "terraform-subnet"
+  wlo-terraform-igw-name = "wlo-terraform-igw"
+  natgw-name = "terraform-nat-gw"
+  publicrtname = "public-subnet-routetable"
+  privatertname = "private-subnet-routetable"
 }
 ```
 
