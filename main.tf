@@ -1,6 +1,6 @@
 module "network" {
   source = "./NetwrokInfra"
-  vpc_cidr_block   = var.vpc_cidr_block
+  vpc_cidr_block   = "10.200.0.0/16"
   vpcname = "wlo-terraform-vpc"
   subnet-name = "terraform-subnet"
   wlo-terraform-igw-name = "wlo-terraform-igw"
