@@ -1,4 +1,4 @@
-# Building AWS Ec2 Instances with Load Balancer using Terraform
+# Building AWS Architecture Ec2 with Load Balancer using Terraform
 
 <h3>Project Overview</h3>
 
