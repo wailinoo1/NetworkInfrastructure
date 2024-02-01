@@ -20,3 +20,11 @@ variable "certificate" {
 variable "alblogs3"{
 
 }
+
+variable "alb-sg-name"{
+
+}
+
+variable "alb-name"{
+
+}
