@@ -23,6 +23,7 @@ module "server" {
 module "loadbalancer" {
   source = "./LoadBalancer"
   vpcid = module.network.vpcid
+  alblogs3 = "nginx-logs-bucket-wlo"
   alb-ingress-port = [80,443]
   public-subnetid = module.network.public-subnetid
   instance-id = module.server.instance-id
