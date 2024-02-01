@@ -24,7 +24,7 @@ resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
 }
 
 resource "aws_security_group" "wlo-terraform-alb-sg" {
-  name   = "wlo-terraform-alb-sg"
+  name   = "var.alb-sg-name"
   vpc_id = var.vpcid
   
   dynamic "ingress" {
@@ -46,20 +46,19 @@ resource "aws_security_group" "wlo-terraform-alb-sg" {
 
 
 resource "aws_lb" "terraform-alb" {
-  name               = "wlo-terraform-alb"
+  name               = "var.alb-name"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.wlo-terraform-alb-sg.id]
   subnets            = [for subnet in var.public-subnetid : subnet]
  
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
-#   access_logs {
-#     bucket  = aws_s3_bucket.logs_bucket.id
-#     prefix = "alblogseeee"
-#     enabled = true
-#   }
+     access_logs {
+      bucket  = aws_s3_bucket.nginx-alb-logs.id
+      enabled = true
+    }
 
   tags = {
     Environment = "wlo-terraform-alb"
