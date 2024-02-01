@@ -1,3 +1,28 @@
+resource "aws_s3_bucket" "nginx-alb-logs" {
+  bucket = var.alblogs3
+  tags = {
+    Name        = "${var.alblogs3}"
+  }
+}
+
+resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
+  bucket = aws_s3_bucket.nginx-alb-logs.bucket
+
+  policy = jsonencode({
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::114774131450:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::${var.alblogs3}/*"
+    }
+  ]
+})
+}
+
 resource "aws_security_group" "wlo-terraform-alb-sg" {
   name   = "wlo-terraform-alb-sg"
   vpc_id = var.vpcid
