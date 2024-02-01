@@ -106,5 +106,21 @@ module "loadbalancer" {
 ```
 <h3>If you don't now how to get your certificate arn from AWS ACM , below link will be a good fit to research</h3>
 <h4>https://medium.com/@wailinoo.2012/requesting-certificate-using-aws-certificate-manager-119f6ad8d2ab</h4>
+
+<h3>Terraform Stage Management</h3>
+
+```terraform
+terraform {
+  backend "s3" {
+    bucket         = "your S3 Bucket name to store stage file"
+    key            = "terraform.tfstate"  # Replace with a unique key for each configuration
+    region         = "ap-southeast-1"
+    encrypt        = true
+    acl            = "private"
+    #dynamodb_table = "terraform-lock"  # Optional: Use DynamoDB for state locking
+  }
+}
+```
+
 <h3>Conclution</h3>
 By structuring the architecture into modular components, the project aimed to achieve scalability, maintainability, and repeatability in infrastructure deployment and management. This approach facilitated easy scalability and future modifications to accommodate evolving business requirements and traffic demands. Additionally, using Terraform allowed for version-controlled infrastructure changes and simplified infrastructure provisioning across multiple environments.
