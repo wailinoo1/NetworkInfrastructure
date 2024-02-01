@@ -1,7 +1,9 @@
 variable "subnetid" {
 
 }
-
+variable "ingress-port" {
+  type = list
+}
 variable "vpcid" {
   
 }

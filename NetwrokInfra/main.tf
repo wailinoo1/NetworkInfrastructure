@@ -4,14 +4,14 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = "true"
   enable_dns_support   = "true"
   tags = {
-    Name = "wlo-terraform-vpc"                  #Naming for VPC
+    Name = "${var.vpcname}"                  #Naming for VPC
   }
 }
 
 resource "aws_internet_gateway" "internet-gateway" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "wlo-terraform-igw"
+    Name = "${var.wlo-terraform-igw-name}"
   }
   depends_on = [ aws_vpc.main ]
 }
@@ -28,7 +28,7 @@ resource "aws_subnet" "subnet" {
 
   availability_zone = element(["ap-southeast-1a", "ap-southeast-1b"], count.index)
   tags = {
-    Name = "terraform-subnet-${local.subnet[count.index]}"
+    Name = "${var.subnet-name}-${local.subnet[count.index]}"
   }
   depends_on = [ aws_vpc.main ]
 }
@@ -44,7 +44,7 @@ resource "aws_nat_gateway" "nat-gateway" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.subnet[0].id
   tags = {
-    Name = "terraform-nat-gw"
+    Name = "${var.natgw-name}"
   }
 }
 
@@ -57,7 +57,7 @@ resource "aws_route_table" "public-subnet-routetable" {
   }
 
   tags = {
-    Name = "public-subnet-routetable"
+    Name = "${var.publicrtname}"
   }
   depends_on = [ aws_vpc.main ]
 
@@ -80,7 +80,7 @@ resource "aws_route_table" "private-subnet-routetable" {
   }
 
   tags = {
-    Name = "private-subnet-routetable"
+    Name = "${var.privatertname}"
   }
   depends_on = [ aws_vpc.main ]
 }
