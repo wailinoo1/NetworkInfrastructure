@@ -51,7 +51,7 @@ module "loadbalancer" {
   alb-ingress-port = [80,443]
   public-subnetid = module.network.public-subnetid
   instance-id = module.server.instance-id
-  certificate = " - your certificate arn"
+  certificate = " - text in red your certificate arn"
 }
 ```
 
