@@ -17,3 +17,6 @@ variable "instance-id" {
 variable "certificate" {
   
 }
+variable "alblogs3"{
+
+}
