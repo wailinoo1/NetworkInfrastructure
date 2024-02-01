@@ -104,6 +104,7 @@ module "loadbalancer" {
   certificate = "your certificate arn"
 }
 ```
-
+<h3>If you don't now how to get your certificate arn from AWS ACM , below link will be a good fit to research</h3>
+<h4>https://medium.com/@wailinoo.2012/requesting-certificate-using-aws-certificate-manager-119f6ad8d2ab</h4>
 <h3>Conclution</h3>
 By structuring the architecture into modular components, the project aimed to achieve scalability, maintainability, and repeatability in infrastructure deployment and management. This approach facilitated easy scalability and future modifications to accommodate evolving business requirements and traffic demands. Additionally, using Terraform allowed for version-controlled infrastructure changes and simplified infrastructure provisioning across multiple environments.
