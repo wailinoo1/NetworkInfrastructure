@@ -24,7 +24,7 @@ resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
 }
 
 resource "aws_security_group" "wlo-terraform-alb-sg" {
-  name   = "var.alb-sg-name"
+  name   = var.alb-sg-name
   vpc_id = var.vpcid
   
   dynamic "ingress" {
@@ -46,7 +46,7 @@ resource "aws_security_group" "wlo-terraform-alb-sg" {
 
 
 resource "aws_lb" "terraform-alb" {
-  name               = "var.alb-name"
+  name               = var.alb-name
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.wlo-terraform-alb-sg.id]
@@ -61,7 +61,7 @@ resource "aws_lb" "terraform-alb" {
     }
 
   tags = {
-    Environment = "wlo-terraform-alb"
+    Environment = "${var.alb-name}"
   }
   depends_on = [ aws_security_group.wlo-terraform-alb-sg ]
 }
