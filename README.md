@@ -4,6 +4,8 @@
 
 <div>The project involved the creation of a robust and scalable architecture on AWS using Terraform to provision resources efficiently. This architecture comprised two EC2 instances hosting NGINX servers, orchestrated by an Application Load Balancer (ALB) to distribute incoming traffic. The infrastructure was deployed within a Virtual Private Cloud (VPC) consisting of two public subnets for NAT gateway and ALB, and two private subnets spanning different availability zones to ensure high availability and fault tolerance.</div>
 
+![alt text](https://drive.google.com/file/d/1T11UDlCovOegIMSSsJKKcxLkvwWilh43/view?usp=sharing)
+
 Description:
 The project aimed to deploy a resilient AWS architecture using infrastructure as code (IaC) principles to streamline resource provisioning and management. Leveraging Terraform, the infrastructure was divided into three modular components: Network, Server, and Load Balancer.
 
