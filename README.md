@@ -45,6 +45,7 @@ module "loadbalancer" {
 ```
 
 <h3>Terraform Command:</h3>
+
 ```terraform
 terraform init
 terraform validate
