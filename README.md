@@ -47,6 +47,12 @@ module "loadbalancer" {
 <h3>Terraform Command:</h3>
 
 ```terraform
+cd NetworkInfra && terraform init
+cd EC2 && terraform init
+cd LoadBalancer && terraform init
+
+For terraform root module:
+
 terraform init
 terraform validate
 terraform plan
