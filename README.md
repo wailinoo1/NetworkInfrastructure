@@ -109,6 +109,8 @@ module "loadbalancer" {
 
 <h3>Terraform Stage Management</h3>
 
+We are using S3 Bucket to store Terraform state files for the purpose of collaboration, version control, and consistency across teams by providing a centralized location for storing and sharing infrastructure state. This prevents conflicts and enables concurrent modifications to infrastructure as code while maintaining integrity and facilitating rollbacks when necessary.
+
 ```terraform
 terraform {
   backend "s3" {
