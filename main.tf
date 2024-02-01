@@ -26,6 +26,6 @@ module "loadbalancer" {
   alb-ingress-port = [80,443]
   public-subnetid = module.network.public-subnetid
   instance-id = module.server.instance-id
-  certificate = "arn:aws:acm:ap-southeast-1:896836667748:certificate/31e9d408-5919-4cc4-b69e-2c1129b177e2"
+  certificate = "your certificate arn from AWS ACM"
 
 }
