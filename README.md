@@ -11,6 +11,7 @@ The project aimed to deploy a resilient AWS architecture using infrastructure as
 
 <h3>Root Module</h3>
 
+<p>Root Module inclues 3 main modules to build this approach architecture</p>
 ```terraform
 module "network" {
   source = "./NetwrokInfra"
