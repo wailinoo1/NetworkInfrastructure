@@ -9,7 +9,6 @@
 <h3>Description</h3>
 The project aimed to deploy a resilient AWS architecture using infrastructure as code (IaC) principles to streamline resource provisioning and management. Leveraging Terraform, the infrastructure was divided into three modular components: Network, Server, and Load Balancer.
 
-![CHEESE](photo/structure.jpg)
 
 <h3>Root Module</h3>
 
