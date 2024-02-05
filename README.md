@@ -125,5 +125,5 @@ terraform {
 }
 ```
 
-<h3>Conclution</h3>
+<h3>Conclusion</h3>
 By structuring the architecture into modular components, the project aimed to achieve scalability, maintainability, and repeatability in infrastructure deployment and management. This approach facilitated easy scalability and future modifications to accommodate evolving business requirements and traffic demands. Additionally, using Terraform allowed for version-controlled infrastructure changes and simplified infrastructure provisioning across multiple environments.
